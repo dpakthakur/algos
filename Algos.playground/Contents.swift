@@ -15,8 +15,10 @@ class Solution {
     func refactorTwoSum(_ nums: [Int], _ target: Int) -> [Int] {
         var dict = [Int: Int]() //used to store numbers from the nums array as keys and their corresponding indices as values
         for (indx, val) in nums.enumerated() {
-            if let nextIndx = dict[target - val] {
-                return [indx, nextIndx]
+            // current number + complement = target
+            print("complement: ", dict[target - val] ?? "nil") // prints complement: 1
+            if let indxOfComplimentNumber = dict[target - val] { //target - val: For the current number val, we calculate what number (its "complement") would be needed to reach the target
+                return [indx, indxOfComplimentNumber]
             }
             dict[val] = indx
         }
@@ -25,4 +27,4 @@ class Solution {
 }
 
 let solution = Solution()
-print(solution.refactorTwoSum([2, 7, 11, 15], 22)) // Output: [0, 1]
+print(solution.refactorTwoSum([2, 7, 11, 15], 22)) // Output: [3, 1]
